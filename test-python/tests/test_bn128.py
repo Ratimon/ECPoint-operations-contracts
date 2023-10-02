@@ -10,12 +10,7 @@ def test_simple_add():
     one_half = pow(2, -1, curve_order)
     g_three = add(multiply(G1, five_over_two), multiply(G1, one_half))
 
-    print("five_over_two is {}".format(five_over_two))
-    print("one_half is {}".format(one_half))
-    print("LHS is {}".format(g_three))
-    print("RHS is {}".format(multiply(G1, 3)))
-
-    assert False
+    assert add( multiply(G1, five_over_two) , multiply(G1, one_half) ) == g_three
 
 def test_zk_add_int():
 
@@ -47,8 +42,6 @@ def test_zk_add_rational():
 
     #  G * (53/192) + G * (61/511) = G * (38795/98112)
 
-   
-
     num_over_den1 = (numerator1 * pow(denominator1, -1, curve_order)) % curve_order
     e_x = multiply(G1, num_over_den1)
 
@@ -67,4 +60,5 @@ def test_zk_add_rational():
     print("LHS {}".format(add( e_x, e_y )))
     print("RHS {}".format(e_public))
 
-    assert False
+    # verifier
+    assert add( e_x, e_y ) == e_public
