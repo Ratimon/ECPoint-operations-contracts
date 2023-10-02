@@ -1,17 +1,6 @@
 from py_ecc.bn128 import curve_order, G1, multiply, add, eq, neg
 
 
-def test_simple_add():
-
-    print(G1)
-    print(add(G1, G1))
-
-    five_over_two = (5 * pow(2, -1, curve_order)) % curve_order
-    one_half = pow(2, -1, curve_order)
-    g_three = add(multiply(G1, five_over_two), multiply(G1, one_half))
-
-    assert add( multiply(G1, five_over_two) , multiply(G1, one_half) ) == g_three
-
 def test_zk_add_int():
 
     # Prover
@@ -28,6 +17,14 @@ def test_zk_add_int():
 
     # verifier
     assert multiply(G1, proof[2]) == add(proof[0], proof[1])
+
+def test_simple_zk_add_rational():
+
+    five_over_two = (5 * pow(2, -1, curve_order)) % curve_order
+    one_half = pow(2, -1, curve_order)
+    g_three = add(multiply(G1, five_over_two), multiply(G1, one_half))
+
+    assert add( multiply(G1, five_over_two) , multiply(G1, one_half) ) == g_three
 
 def test_zk_add_rational():
 

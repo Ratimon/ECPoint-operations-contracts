@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def matrix_multiply(A, B):
     A = np.array(A)
     B = np.array(B)
@@ -11,15 +10,6 @@ def matrix_multiply(A, B):
     return C
 
 def test_simple_matrix_multiply():
-    A = [[1,2,3],[4,5,6],[7,8,9]]
-    B = [[1,1,1],[2,2,2],[3,3,3]]
-
-    matrix_result = matrix_multiply(A, B)
-    print(matrix_result)
-    assert False
-
-def test_simple_matrix_multiply():
-
     # 2x + 8y = 7944
     # 5x + 3y = 4764
 
