@@ -57,8 +57,9 @@ def test_zk_add_rational():
 
     print("e_x {}".format(e_x))
     print("e_y {}".format(e_y))
-    print("LHS {}".format(add( e_x, e_y )))
+    # print("LHS {}".format(add( e_x, e_y )))
     print("RHS {}".format(e_public))
 
     # verifier
-    assert add( e_x, e_y ) == e_public
+    # assert add( e_x, e_y ) == e_public
+    assert false
