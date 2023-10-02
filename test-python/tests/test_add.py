@@ -62,4 +62,4 @@ def test_zk_add_rational():
 
     # verifier
     # assert add( e_x, e_y ) == e_public
-    assert false
+    assert False

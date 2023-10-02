@@ -7,9 +7,10 @@ readme = "README.md"
 packages = [{include = "test_python"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.13"
 py-ecc = "^6.0.0"
 pytest = "^7.4.2"
+numpy = "^1.26.0"
 
 
 [build-system]
