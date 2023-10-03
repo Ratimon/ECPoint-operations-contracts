@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity =0.8.20;
 
-import {Test, stdError} from "@forge-std/Test.sol";
+import {Test,console2, stdError} from "@forge-std/Test.sol";
 
 import {ECOperations} from "@main/ECOperations.sol";
 
@@ -51,7 +51,52 @@ contract ECOperationsTest is Test {
         vm.stopPrank();
     }
 
-    function test_matMul() external {
+    function test_matMul() external view {
+
+        // 2x + 8y = 7944
+        // 5x + 3y = 4764
+    
+        // Known solution (known only to the prover)
+        // x = 420
+        // y = 888
+
+        // To get the value: (x, y). run:
+        // poetry run pytest
+
+        uint256[] memory matrix = new uint256[](4);
+        matrix[0] = 2;
+        matrix[1] = 8;
+        matrix[2] = 5;
+        matrix[3] = 3;
+
+
+        ECOperations.ECPoint[] memory s = new ECOperations.ECPoint[](2);
+        // encrypted x
+        s[0] = ECOperations.ECPoint({
+            x: uint256(14272123054654457709936604042122767711746368495379248511670154852957621272879),
+            y: uint256(5390793356463663377023184148570679692566494850099183968889446432602329490088)
+        });
+        // encrypted y
+        s[1] = ECOperations.ECPoint({
+            x: uint256(16760028444954030715126837513142897443651137261182029666892102559655800691858),
+            y: uint256(12495712043539181555106178299219046652619546681353186672747926470895059430081)
+        });
+
+        ECOperations.ECPoint[] memory o = new ECOperations.ECPoint[](2);
+
+        // encrypted public value 1 (2x + 8y = 7944)
+        o[0] = ECOperations.ECPoint({
+            x: uint256(7757279648308878215836488252689090467101377130260313290204625474069337732825),
+            y: uint256(4624815465799577881298086553487173444342537614138234158000905409423691879147)
+        });
+
+        // encrypted public value 1  (5x + 3y = 4764)
+        o[1] = ECOperations.ECPoint({
+            x: uint256(16589555354478738665653818189207798234004106182069212202332433305931359753608),
+            y: uint256(11859774485116223636876532794734439163672571181290517648884358945579572799746)
+        });
+
+        ec.matMul(matrix, 2, s, o);
 
     }
 }

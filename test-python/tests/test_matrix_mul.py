@@ -8,7 +8,6 @@ def matrix_multiply(A, B):
 
     C = A @ B 
     # Alternatively, use np.dot(A, B)
-
     return C
 
 def test_simple_matrix_multiply():
@@ -41,11 +40,13 @@ def test_zk_matrix_multiply():
     secret_x = 420
     secret_y = 888
 
+    # encrypted x
     e_x = multiply(G1, secret_x)
+    # encrypted y
     e_y = multiply(G1, secret_y)
 
-    print("e_x {}".format(e_x))
-    print("e_y {}".format(e_y))
+    print("encrypted x: e_x {}".format(e_x))
+    print("encrypted y: e_y {}".format(e_y))
 
     # 7944 = 2 * 420 +  8 * 888
     public1 = 2*secret_x + 8*secret_y
@@ -56,12 +57,11 @@ def test_zk_matrix_multiply():
     e_public1 = multiply(G1, public1)
 
     # proof1 = (e_x1, e_y1, public1)
-
     print("two_e_x {}".format(two_e_x))
     print("eight_e_y {}".format(eight_e_y))
 
-    print("LHS1 {}".format(add( two_e_x, eight_e_y )))
-    print("RHS1 {}".format(e_public1))
+    print("e_2x + e_8y: LHS1 {}".format(add( two_e_x, eight_e_y )))
+    print("encrypted public 1: RHS1 {}".format(e_public1))
 
 
     # 4764 = 5x + 3y 
@@ -73,24 +73,11 @@ def test_zk_matrix_multiply():
     e_public2 = multiply(G1, public2)
 
     # proof1 = (e_x1, e_y1, public1)
-
     print("five_e_x {}".format(five_e_x))
     print("three_e_y {}".format(three_e_y))
 
-    print("LHS2 {}".format(add( five_e_x, three_e_y )))
-    print("RHS2 {}".format(e_public2))
-
-    A = [[2, 8],[5, 3]]
-    B = [[e_x],[e_y]]
-
-    C = [[e_public1],[e_public2]]
-
-    # matrix_result = matrix_multiply(A, B)
-
-
-
-
-
+    print("e_5x + e_3y: LHS2 {}".format(add( five_e_x, three_e_y )))
+    print("encrypted public 2: RHS2 {}".format(e_public2))
 
     # verifier
     assert False

@@ -1,6 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity =0.8.20;
 
+import {Test,console2, stdError} from "@forge-std/Test.sol";
 
 /**
  * @notice leverages the precompiles
@@ -46,8 +47,7 @@ contract ECOperations {
        ) public view returns (bool verified) {
 
         // revert if dimensions don't make sense or the matrices are empty
-        uint256 matrixLength = matrix.length;
-        require(matrixLength == n*n, "matrix length does not match");
+        require(matrix.length == n*n, "matrix length does not match");
 
         uint256 matrixCounter = 0;
 
@@ -84,7 +84,7 @@ contract ECOperations {
             ECPoint memory cachedSum = cachedPoints[0];
            
             // k = 0
-            for (uint256 k = 0; k < n; k++) {
+            for (uint256 k = 0; k < n-1; k++) {
                 
                 addInput[0] = cachedSum.x;
                 addInput[1] = cachedSum.y;
@@ -101,6 +101,11 @@ contract ECOperations {
             }
 
             sumPoints[i] = cachedSum;
+
+            console2.log("sumPoints[i].x");
+            console2.log(sumPoints[i].x);
+            console2.log("sumPoints[i].y");
+            console2.log(sumPoints[i].y);
 
         }
 
