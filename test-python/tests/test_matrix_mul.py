@@ -50,35 +50,34 @@ def test_zk_matrix_multiply():
 
     # 7944 = 2 * 420 +  8 * 888
     public1 = 2*secret_x + 8*secret_y
-    print("public1 {}".format(public1))
+    # print("public1 {}".format(public1))
 
     two_e_x = multiply(e_x, 2)
     eight_e_y = multiply(e_y, 8)
     e_public1 = multiply(G1, public1)
 
-    # proof1 = (e_x1, e_y1, public1)
-    print("two_e_x {}".format(two_e_x))
-    print("eight_e_y {}".format(eight_e_y))
+    # print("two_e_x {}".format(two_e_x))
+    # print("eight_e_y {}".format(eight_e_y))
 
-    print("e_2x + e_8y: LHS1 {}".format(add( two_e_x, eight_e_y )))
+    # print("e_2x + e_8y: LHS1 {}".format(add( two_e_x, eight_e_y )))
     print("encrypted public 1: RHS1 {}".format(e_public1))
 
 
     # 4764 = 5x + 3y 
     public2 = 5*secret_x + 3*secret_y
-    print("public2 {}".format(public2))
+    # print("public2 {}".format(public2))
 
     five_e_x = multiply(e_x, 5)
     three_e_y = multiply(e_y, 3)
     e_public2 = multiply(G1, public2)
 
-    # proof1 = (e_x1, e_y1, public1)
-    print("five_e_x {}".format(five_e_x))
-    print("three_e_y {}".format(three_e_y))
+    # print("five_e_x {}".format(five_e_x))
+    # print("three_e_y {}".format(three_e_y))
 
-    print("e_5x + e_3y: LHS2 {}".format(add( five_e_x, three_e_y )))
+    # print("e_5x + e_3y: LHS2 {}".format(add( five_e_x, three_e_y )))
     print("encrypted public 2: RHS2 {}".format(e_public2))
 
     # verifier
+    assert add( two_e_x, eight_e_y ) == e_public1
+    assert add( five_e_x, three_e_y ) == e_public2
     assert False
-    # assert multiply(G1, proof1[2]) == add(proof1[0], proof1[1])

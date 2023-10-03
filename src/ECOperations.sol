@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity =0.8.20;
 
-import {Test,console2, stdError} from "@forge-std/Test.sol";
 
 /**
  * @notice leverages the precompiles
@@ -102,17 +101,11 @@ contract ECOperations {
 
             sumPoints[i] = cachedSum;
 
-            console2.log("sumPoints[i].x");
-            console2.log(sumPoints[i].x);
-            console2.log("sumPoints[i].y");
-            console2.log(sumPoints[i].y);
-
         }
 
         require(sumPoints.length == n, "sumPoints length does not match");
 
         for (uint256 l = 0; l < n; l++) {
-
             // return true if Ms == 0 elementwise. You need to do n equality checks.
             require(sumPoints[l].x == o[l].x, "result.x does not match");
             require(sumPoints[l].y == o[l].y, "result.y does not match");
