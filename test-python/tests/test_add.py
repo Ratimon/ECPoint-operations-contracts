@@ -26,6 +26,7 @@ def test_simple_zk_add_rational():
 
     assert add( multiply(G1, five_over_two) , multiply(G1, one_half) ) == g_three
 
+# This is where will use printing results to the hard-coded param in solidity code
 def test_zk_add_rational():
 
     # Prover
