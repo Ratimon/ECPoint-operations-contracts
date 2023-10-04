@@ -1,66 +1,44 @@
-## Foundry
+## ECPoint-operations-contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
+Elliptic curve point operations on solidity contract that leverages the precompiles : **add** and **multiplication** for Elliptic curve point (EIP196)
 
 ## Usage
 
 ### Build
 
-```shell
-$ forge build
+```bash
+forge build
 ```
 
 ### Test
 
-```shell
-$ forge test
+#### Test Suites on Solidity Implementation
+
+```bash
+forge test -vvvv
 ```
+
+#### Test Suites on Python Poc
+
+```bash
+cd test-python
+```
+
+```bash
+poetry run pytest tests/test_add.p
+```
+
+```bash
+poetry run pytest tests/test_matrix_mul.py
+```
+
+> 💡 Note:
+
+We use Python to generate the test cases and use relevant parameter(like EC points in Solidity test suites)
 
 ### Format
 
-```shell
+```bash
 $ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
 ```
