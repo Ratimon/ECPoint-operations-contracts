@@ -29,7 +29,7 @@ contract ECOperationsTest is Test {
     function test_rationalAdd() external {
         vm.startPrank(alice);
 
-        // To get the value: (x, y). run:
+        // To get the value: (x, y) for test cases. run:
         // poetry run pytest tests/test_add.py
         ECOperations.ECPoint memory point1 = ECOperations.ECPoint({
             x: uint256(4746413956640574926461252727128477233913017861890454231694527599705621810724),
@@ -60,7 +60,7 @@ contract ECOperationsTest is Test {
         // x = 420
         // y = 888
 
-        // To get the value: (x, y). run:
+        // To get the value: (x, y) for test cases. run:
         // poetry run pytest
 
         uint256[] memory matrix = new uint256[](4);
@@ -69,7 +69,7 @@ contract ECOperationsTest is Test {
         matrix[2] = 5;
         matrix[3] = 3;
 
-        // To get the value: (x, y). run:
+        // To get the value: (x, y) for test cases . run:
         // poetry run pytest tests/test_matrix_mul.py
         ECOperations.ECPoint[] memory s = new ECOperations.ECPoint[](2);
         // encrypted x

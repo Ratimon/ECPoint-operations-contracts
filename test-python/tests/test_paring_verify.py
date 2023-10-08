@@ -9,20 +9,12 @@ def test_zk_verify():
     # B = multiply(G1, 6)
     # C = multiply(G1, 5 * 6)
 
-    # # pairing(A, B) == pairing(G2, C) 
-
     # print("pairing(A, B) == pairing(G2, C)  {}".format(pairing(A, B) == pairing(G2, C) ))
-
-
-    print("G1 {}".format(G1))
-    print("neg(G1) {}".format(neg(G1)))
-
-
     
     # 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
     # 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
 
-    # a = 61
+    # a = - 61
     # b = 1
 
     # c = 7
@@ -34,32 +26,30 @@ def test_zk_verify():
     # g = 4
     # h = 5
 
-    A = multiply(G2, 61)
-    B = multiply(G1, 1)
+    A = multiply(G1, 61)
+    B = multiply(G2, 1)
+    A_negate = neg(A)
 
-    C = multiply(G2, 7)
-    D = multiply(G1, 3)
+    C = multiply(G1, 7)
+    D = multiply(G2, 3)
 
-    E = multiply(G2, 10)
-    F = multiply(G1, 2)
+    E = multiply(G1, 10)
+    F = multiply(G2, 2)
 
-    G = multiply(G2, 4)
-    H = multiply(G1, 5)
+    G = multiply(G1, 4)
+    H = multiply(G2, 5)
 
-    LHS = pairing(A, B)
-
-
-    print("LHS {}".format(LHS))
-    # print("pairing(A, B) == pairing(C, G1) {}".format(pairing(A, B) == pairing(C, D)))
-
-    # RHS1 = pairing(C, D)
-    # RHS2 = pairing(E, F)
-    # RHS3 = pairing(G, H)
-
-    # RHS = add(add(RHS1, RHS2), RHS3)
-
-
+    print("e_A_negate {}".format(A_negate))
+    print("e_B {}".format(B))
     
-    # print("RHS {}".format(RHS))
+
+    print("e_C {}".format(C))
+    print("e_D {}".format(D))
+
+    print("e_E {}".format(E))
+    print("e_F {}".format(F))
+
+    print("e_G {}".format(G))
+    print("e_H {}".format(H))
 
     assert False
