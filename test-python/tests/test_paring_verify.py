@@ -5,11 +5,11 @@ from py_ecc.bn128 import curve_order, G1, G2, multiply, add, eq, neg, pairing
 def test_zk_verify():
 
 
-    # A = multiply(G2, 5)
-    # B = multiply(G1, 6)
-    # C = multiply(G1, 5 * 6)
+    A = multiply(G2, 5)
+    B = multiply(G1, 6)
+    C = multiply(G1, 5 * 6)
 
-    # print("pairing(A, B) == pairing(G2, C)  {}".format(pairing(A, B) == pairing(G2, C) ))
+    print("pairing(A, B) == pairing(G2, C)  {}".format(pairing(A, B) == pairing(G2, C) ))
     
     # 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
     # 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
@@ -42,7 +42,6 @@ def test_zk_verify():
     print("e_A_negate {}".format(A_negate))
     print("e_B {}".format(B))
     
-
     print("e_C {}".format(C))
     print("e_D {}".format(D))
 

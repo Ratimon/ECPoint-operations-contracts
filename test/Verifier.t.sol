@@ -26,8 +26,16 @@ contract VerifierTest is Test {
         vm.stopPrank();
     }
 
-
+    /**
+    * @notice verifies the computation for the EC points.
+    */
     function test_verify() external {
+
+        // 0 = − A B + α β + X γ + C δ 
+        // where X = 1 x G1 + 1 x G1 + 2 x G1
+        
+        // 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
+        // 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
 
         // a = - 61
         // b = 1
@@ -40,7 +48,7 @@ contract VerifierTest is Test {
     
         // g = 4
         // h = 5
-    
+
 
         // To get the value for test cases. run:
         // poetry run pytest tests/test_paring_verify.py
