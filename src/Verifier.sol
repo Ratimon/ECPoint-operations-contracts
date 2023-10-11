@@ -143,6 +143,49 @@ contract Verifier {
         return G1Point(p.X, PRIME_Q - (p.Y % PRIME_Q));
         }
     }
+    
+
+    /*
+    * @return r the sum of two points of G1
+    */
+    function plus(
+        G1Point memory p1,
+        G1Point memory p2
+    ) internal view returns (G1Point memory r) {
+        uint256[4] memory input;
+        input[0] = p1.X;
+        input[1] = p1.Y;
+        input[2] = p2.X;
+        input[3] = p2.Y;
+        bool success;
+
+        assembly {
+            success := staticcall(sub(gas(), 2000), 6, input, 0xc0, r, 0x60)
+            // Use "invalid" to make gas estimation work
+            switch success case 0 { invalid() }
+        }
+
+        require(success, "pairing-add-failed");
+    }
+
+    /*
+    * @return r the product of a point on G1 and a scalar, i.e.
+    *         p == p.scalar_mul(1) and p.plus(p) == p.scalar_mul(2) for all
+    *         points p.
+    */
+    function scalar_mul(G1Point memory p, uint256 s) internal view returns (G1Point memory r) {
+        uint256[3] memory input;
+        input[0] = p.X;
+        input[1] = p.Y;
+        input[2] = s;
+        bool success;
+        assembly {
+            success := staticcall(sub(gas(), 2000), 7, input, 0x80, r, 0x60)
+            // Use "invalid" to make gas estimation work
+            switch success case 0 { invalid() }
+        }
+        require(success, "pairing-mul-failed");
+    }
 
 
 
