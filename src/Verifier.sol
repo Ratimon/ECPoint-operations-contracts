@@ -17,24 +17,29 @@ contract Verifier {
         uint256[2] Y;
     }
 
+    // 0 = − A B + α β + X γ + C δ
+
+    // where X = 2 x G1 + 3 x G1 + 5 x G1
+
     // 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
     // 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
 
-    // a = 61
-    // b = 1
+    // A1 = 61
+    // B2 = 1
 
-    // c = 7
-    // d = 3
+    // α1 = 7
+    // β2 = 3
 
-    // e = 10
-    // f = 2
+    // X1 = 10
+    // γ2 = 2
 
-    // g = 4
-    // h = 5
+    // C1 = 4
+    // δ2 = 5
 
     // function verify(
-    //     G1Point memory A1
-    // ) {
+    //     G1Point memory A1,
+    //     G2Point memory A2
+    // ) external {
 
     // }
 
@@ -47,7 +52,7 @@ contract Verifier {
         G2Point memory C2,
         G1Point memory D1,
         G2Point memory D2
-      ) external view returns (bool) {
+      ) public view returns (bool) {
 
         G1Point[4] memory P1 = [A1, B1, C1, D1];
         G2Point[4] memory P2 = [A2, B2, C2, D2];
