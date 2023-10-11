@@ -33,9 +33,13 @@ poetry run pytest tests/test_add.p
 poetry run pytest tests/test_matrix_mul.py
 ```
 
+```bash
+poetry run pytest tests/test_paring_verify.py
+```
+
 > 💡 Note:
 
-We use Python to generate the test cases and use relevant parameter(like EC points in Solidity test suites)
+We use Python to generate the test cases and use relevant parameters(like EC points in Solidity test suites)
 
 ### Format
 

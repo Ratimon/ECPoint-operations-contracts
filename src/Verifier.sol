@@ -32,7 +32,7 @@ contract Verifier {
     // g = 4
     // h = 5
 
-    function verify(
+    function paring(
         G1Point memory a1,
         G2Point memory a2,
         G1Point memory b1,

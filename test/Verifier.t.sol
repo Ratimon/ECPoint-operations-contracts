@@ -29,10 +29,10 @@ contract VerifierTest is Test {
     /**
     * @notice verifies the computation for the EC points.
     */
-    function test_verify() external {
+    function test_paring() external {
 
         // 0 = − A B + α β + X γ + C δ 
-        // where X = 1 x G1 + 1 x G1 + 2 x G1
+        // where X = 2 x G1 + 3 x G1 + 5 x G1
         
         // 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
         // 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
@@ -133,7 +133,7 @@ contract VerifierTest is Test {
             ]
         });
 
-        bool isVerified = verifier.verify(a, b, c, d, e, f, g, h);
+        bool isVerified = verifier.paring(a, b, c, d, e, f, g, h);
 
         assertEq(isVerified, true);
 
