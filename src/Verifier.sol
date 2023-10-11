@@ -88,6 +88,54 @@ contract Verifier {
 
     }
 
+    // 0 = − A B + α β + X γ + C δ
+    // where X = 2 x G1 + 3 x G1 + 5 x G1
+
+    // 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
+    // 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
+
+    function verify(
+        G1Point memory A1,
+        G2Point memory B2,
+        G1Point memory C1,
+        uint256[] memory X
+    ) external view returns (bool) {
+
+        require(X.length == 3, "X length does not match");
+
+        Constraints memory cs = constraints();
+
+        // identity
+        G1Point memory X1 = G1Point(0, 0);
+        G1Point memory Generator = G1Point(1, 2);
+
+        for (uint256 i = 0; i < 3; i++) {
+            X1 = plus(X1, scalar_mul(Generator, X[i]));
+        }
+
+        // uint256 sum;
+        // for (uint256 i = 0; i < 3; i++) {
+
+        //    sum = sum + X[i] ;
+
+        // }
+
+        // G1Point memory X1 = scalar_mul(Generator,sum);
+
+        return paring(
+            negate(A1),
+            B2,
+            cs.alfa1,
+            cs.beta2,
+            X1,
+            cs.gamma2,
+            C1,
+            cs.delta2
+        );
+
+    }
+
+
 
     function paring(
         G1Point memory A1,
@@ -161,7 +209,6 @@ contract Verifier {
 
         assembly {
             success := staticcall(sub(gas(), 2000), 6, input, 0xc0, r, 0x60)
-            // Use "invalid" to make gas estimation work
             switch success case 0 { invalid() }
         }
 
@@ -181,7 +228,6 @@ contract Verifier {
         bool success;
         assembly {
             success := staticcall(sub(gas(), 2000), 7, input, 0x80, r, 0x60)
-            // Use "invalid" to make gas estimation work
             switch success case 0 { invalid() }
         }
         require(success, "pairing-mul-failed");

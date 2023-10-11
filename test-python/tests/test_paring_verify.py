@@ -9,6 +9,8 @@ def test_zk_verify():
     B = multiply(G1, 6)
     C = multiply(G1, 5 * 6)
 
+    print("G1  {}".format(G1 ))
+
     print("pairing(A, B) == pairing(G2, C)  {}".format(pairing(A, B) == pairing(G2, C) ))
 
     # 0 = − A B + α β + X γ + C δ
@@ -53,7 +55,7 @@ def test_zk_verify():
     print("e_C1 {}".format(C1))
     print("e_C2 or γ2 {}".format(C2))
 
-    print("e_D1 {}".format(D1))
+    print("e_D1 or C1 {}".format(D1))
     print("e_D2 or δ2 {}".format(D2))
 
     assert False
