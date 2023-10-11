@@ -32,31 +32,37 @@ contract Verifier {
     // g = 4
     // h = 5
 
+    // function verify(
+    //     G1Point memory A1
+    // ) {
+
+    // }
+
     function paring(
-        G1Point memory a1,
-        G2Point memory a2,
-        G1Point memory b1,
-        G2Point memory b2,
-        G1Point memory c1,
-        G2Point memory c2,
-        G1Point memory d1,
-        G2Point memory d2
+        G1Point memory A1,
+        G2Point memory A2,
+        G1Point memory B1,
+        G2Point memory B2,
+        G1Point memory C1,
+        G2Point memory C2,
+        G1Point memory D1,
+        G2Point memory D2
       ) external view returns (bool) {
 
-        G1Point[4] memory p1 = [a1, b1, c1, d1];
-        G2Point[4] memory p2 = [a2, b2, c2, d2];
+        G1Point[4] memory P1 = [A1, B1, C1, D1];
+        G2Point[4] memory P2 = [A2, B2, C2, D2];
     
         uint256 inputSize = 24;
         uint256[] memory input = new uint256[](inputSize);
     
         for (uint256 i = 0; i < 4; i++) {
           uint256 j = i * 6;
-          input[j + 0] = p1[i].X;
-          input[j + 1] = p1[i].Y;
-          input[j + 2] = p2[i].X[0];
-          input[j + 3] = p2[i].X[1];
-          input[j + 4] = p2[i].Y[0];
-          input[j + 5] = p2[i].Y[1];
+          input[j + 0] = P1[i].X;
+          input[j + 1] = P1[i].Y;
+          input[j + 2] = P2[i].X[0];
+          input[j + 3] = P2[i].X[1];
+          input[j + 4] = P2[i].Y[0];
+          input[j + 5] = P2[i].Y[1];
         }
     
         uint256[1] memory out;

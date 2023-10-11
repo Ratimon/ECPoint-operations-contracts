@@ -27,7 +27,7 @@ contract VerifierTest is Test {
     }
 
     /**
-    * @notice verifies the computation for the EC points.
+    * @notice verifies the paring computation of the EC points.
     */
     function test_paring() external {
 
