@@ -18,7 +18,6 @@ contract Verifier {
     }
 
     // 0 = − A B + α β + X γ + C δ
-
     // where X = 2 x G1 + 3 x G1 + 5 x G1
 
     // 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
@@ -113,15 +112,6 @@ contract Verifier {
             X1 = plus(X1, scalar_mul(Generator, X[i]));
         }
 
-        // uint256 sum;
-        // for (uint256 i = 0; i < 3; i++) {
-
-        //    sum = sum + X[i] ;
-
-        // }
-
-        // G1Point memory X1 = scalar_mul(Generator,sum);
-
         return paring(
             negate(A1),
             B2,
@@ -134,8 +124,6 @@ contract Verifier {
         );
 
     }
-
-
 
     function paring(
         G1Point memory A1,
@@ -192,7 +180,6 @@ contract Verifier {
         }
     }
     
-
     /*
     * @return r the sum of two points of G1
     */
@@ -232,7 +219,5 @@ contract Verifier {
         }
         require(success, "pairing-mul-failed");
     }
-
-
 
 }

@@ -4,7 +4,6 @@ from py_ecc.bn128 import G1, G2, multiply, neg, pairing
 
 def test_zk_verify():
 
-
     A = multiply(G2, 5)
     B = multiply(G1, 6)
     C = multiply(G1, 5 * 6)
