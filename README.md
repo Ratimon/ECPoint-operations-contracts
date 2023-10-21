@@ -34,7 +34,7 @@ poetry run pytest tests/test_matrix_mul.py
 ```
 
 ```bash
-poetry run pytest tests/test_paring_verify.py
+poetry run pytest tests/test_simple_verify.py
 ```
 
 > 💡 Note:
