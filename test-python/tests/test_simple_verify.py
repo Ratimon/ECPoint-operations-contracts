@@ -1,5 +1,4 @@
-from py_ecc.bn128 import G1, G2, multiply, neg, pairing
-
+from py_ecc.bn128 import G1, G2,add, multiply, neg, pairing
 
 
 def test_simple_verify():
