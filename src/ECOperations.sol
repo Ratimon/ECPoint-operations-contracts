@@ -57,8 +57,6 @@ contract ECOperations {
             ECPoint memory mulResult;
             ECPoint[] memory cachedPoints = new ECPoint[](n);
 
-            // j = 0
-            // j = 1
             for (uint256 j = 0; j < n; j++) {
 
                 mulInput[0] = s[j].x;

@@ -10,7 +10,8 @@ packages = [{include = "test_python"}]
 python = ">=3.10,<3.13"
 py-ecc = "^6.0.0"
 pytest = "^7.4.2"
-numpy = "^1.26.0"
+numpy = ">=1.21.0"
+galois = "0.3.6"
 
 
 [build-system]

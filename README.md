@@ -37,6 +37,10 @@ poetry run pytest tests/test_matrix_mul.py
 poetry run pytest tests/test_simple_verify.py
 ```
 
+```bash
+poetry run pytest tests/test_r1cs_verifier.py
+```
+
 > 💡 Note:
 
 We use Python to generate the test cases and use relevant parameters(like EC points in Solidity test suites)

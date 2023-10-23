@@ -60,8 +60,6 @@ contract ECOperationsTest is Test {
         // x = 420
         // y = 888
 
-        // To get the value: (x, y) for test cases. run:
-        // poetry run pytest
 
         uint256[] memory matrix = new uint256[](4);
         matrix[0] = 2;
