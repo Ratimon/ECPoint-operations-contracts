@@ -60,7 +60,6 @@ contract ECOperationsTest is Test {
         // x = 420
         // y = 888
 
-
         uint256[] memory matrix = new uint256[](4);
         matrix[0] = 2;
         matrix[1] = 8;

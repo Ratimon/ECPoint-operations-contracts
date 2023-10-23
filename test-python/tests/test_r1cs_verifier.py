@@ -57,8 +57,6 @@ def test_polynomial():
 
     w = FP(np.array([1, out, x, y, v1, v2, v3, v4]))
 
-    w = FP(np.array([1, 22, 1, 2, 1, 4, 4, 4]))
-
     print("w =", w)
 
     print("O =", O)
@@ -69,16 +67,11 @@ def test_polynomial():
     print("Lw * Rw =", LwRw)
     print("Ow =     ", O.dot(w))
 
-
     result = O.dot(w) == np.multiply(L.dot(w),R.dot(w))
     assert result.all(), "result contains an inequality"
 
     result2 = np.multiply(L.dot(w), R.dot(w)) - O.dot(w) == 0
     assert result2.all(), "system contains an inequality"
-
-    # A = multiply(G2, 5)
-    # B = multiply(G1, 6)
-    # C = multiply(G1, 5 * 6)
 
     print("G1 {}".format(G1 ))
     print("G2 {}".format(G2 ))
@@ -93,21 +86,11 @@ def test_polynomial():
     print("e w 3  {}".format( multiply(G1, int(w[4]) ) ))
     print("w 1 {}".format( w[1] ))
 
-
-    # print("e w  {}".format( multiply(G2,w[1]) ))
-
-    # print("G1  {}".format(multiply(G1, 4) ))
-
     vectorized_function = np.vectorize(multiply_G1)
 
     result = vectorized_function(w)
 
     print("result  {}".format(result ))
-
-    # e_w = np.array([ multiply(G1, w[0]), multiply(G1, w[1]), multiply(G1, w[2]), multiply(G1, w[3]), multiply(G1, w[4]), multiply(G1, w[5]), multiply(G1, w[6])])
-    # e_L = np.dot(L, e_w) 
-
-    # print("e_L  {}".format(e_L ))
 
     assert False
 
