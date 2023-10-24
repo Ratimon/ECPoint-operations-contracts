@@ -90,6 +90,21 @@ contract R1CSVerifier {
         );
     }
 
+    // 3rd: (1)v1* (1)v2 + (-1)v3 = 0
+    function verify_three(
+        G1Point memory V1_1,
+        G2Point memory V2_2,
+        G1Point memory V3_1
+    ) external view returns (bool) {
+
+        return pairingProd2(
+            scalar_mul(V1_1, l3*r3),
+            V2_2,
+            negate(scalar_mul(V3_1, o3)),
+            P2()
+        );
+    }
+
     /// @return the result of computing the pairing check
     /// e(p1[0], p2[0]) *  .... * e(p1[n], p2[n]) == 1
     /// For example pairing([P1(), P1().negate()], [P2(), P2()]) should
