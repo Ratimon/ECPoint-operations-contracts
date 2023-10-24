@@ -105,6 +105,21 @@ contract R1CSVerifier {
         );
     }
 
+    // 4th: (1)x* (1)v2 + (-1)v4 = 0
+    function verify_four(
+        G1Point memory X_1,
+        G2Point memory V2_2,
+        G1Point memory V4_1
+    ) external view returns (bool) {
+
+        return pairingProd2(
+            scalar_mul(X_1, l3*r4),
+            V2_2,
+            negate(scalar_mul(V4_1, o4)),
+            P2()
+        );
+    }
+
     /// @return the result of computing the pairing check
     /// e(p1[0], p2[0]) *  .... * e(p1[n], p2[n]) == 1
     /// For example pairing([P1(), P1().negate()], [P2(), P2()]) should
