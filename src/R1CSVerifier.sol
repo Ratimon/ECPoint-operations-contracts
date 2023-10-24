@@ -4,7 +4,7 @@ pragma solidity =0.8.20;
 /**
  * @notice leverages the precompiles
  */
-contract EncryptedR1CSVerifier {
+contract R1CSVerifier {
 
     struct G1Point {
         uint256 X;
