@@ -22,23 +22,19 @@ forge test -vvvv
 #### Test Suites on Python Poc
 
 ```bash
-cd test-python
+poetry run pytest tests-python/test_add.py
 ```
 
 ```bash
-poetry run pytest tests/test_add.p
+poetry run pytest tests-python/test_matrix_mul.py
 ```
 
 ```bash
-poetry run pytest tests/test_matrix_mul.py
+poetry run pytest tests-python/test_simple_verify.py
 ```
 
 ```bash
-poetry run pytest tests/test_simple_verify.py
-```
-
-```bash
-poetry run pytest tests/test_r1cs_verifier.py
+poetry run pytest tests-python/test_r1cs_verifier.py
 ```
 
 > 💡 Note:

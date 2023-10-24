@@ -29,7 +29,7 @@ contract EncryptedR1CSVerifierTest is Test {
 
     function test_verify_one() external {
  
-        // poetry run pytest tests/test_r1cs_verifier.py
+        // poetry run pytest tests-python/test_r1cs_verifier.py
         // # Our witness vector is: [1 out x y v1 v2 v3 v4]
         // w  [ 1 22  1  2  1  4  4  4]
 

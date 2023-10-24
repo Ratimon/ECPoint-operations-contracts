@@ -30,7 +30,7 @@ contract ECOperationsTest is Test {
         vm.startPrank(alice);
 
         // To get the value: (x, y) for test cases. run:
-        // poetry run pytest tests/test_add.py
+        // poetry run pytest tests-python/test_add.py
         ECOperations.ECPoint memory point1 = ECOperations.ECPoint({
             x: uint256(4746413956640574926461252727128477233913017861890454231694527599705621810724),
             y: uint256(16193881401749671088058241155929092985630179886603826254428773505483197550341)
@@ -67,7 +67,7 @@ contract ECOperationsTest is Test {
         matrix[3] = 3;
 
         // To get the value: (x, y) for test cases . run:
-        // poetry run pytest tests/test_matrix_mul.py
+        // poetry run pytest tests-python/test_matrix_mul.py
         ECOperations.ECPoint[] memory s = new ECOperations.ECPoint[](2);
         // encrypted x
         s[0] = ECOperations.ECPoint({

@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "test-python"
+name = "ecpoint-operations-contracts"
 version = "0.1.0"
 description = ""
 authors = ["Ratimon <ratixoxo@gmail.com>"]
 readme = "README.md"
-packages = [{include = "test_python"}]
+# packages = [{include = "ecpoint_operations_contracts"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"

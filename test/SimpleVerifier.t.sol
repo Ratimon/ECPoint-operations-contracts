@@ -48,7 +48,7 @@ contract SimpleVerifierTest is Test {
 
 
         // To get the value for test cases. run:
-        // poetry run pytest tests/test_paring_verify.py
+        // poetry run pytest tests-python/test_paring_verify.py
 
         // encrypted : - A1 = 61
         // e_A1_negate (14960043073304393894129795755410277211446607165064567980923647220163495826045, 8311215364928706283575879525912797318003574384387294395703265103176317195920)
