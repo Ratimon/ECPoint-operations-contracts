@@ -113,7 +113,7 @@ contract R1CSVerifier {
     ) external view returns (bool) {
 
         return pairingProd2(
-            scalar_mul(X_1, l3*r4),
+            scalar_mul(X_1, l4*r4),
             V2_2,
             negate(scalar_mul(V4_1, o4)),
             P2()
@@ -288,9 +288,5 @@ contract R1CSVerifier {
         }
         require(success, "pairing-mul-failed");
     }
-
-
-
-
 
 }

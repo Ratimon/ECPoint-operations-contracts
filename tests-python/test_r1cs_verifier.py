@@ -118,36 +118,55 @@ def test_parings():
 
     # 1st: x*x - v1 = 0
     # 1st: 1*1 - 1 = 0
-    e2_x = multiply(G2, w[2])
     e1_x = multiply(G1, w[2])
+    e2_x = multiply(G2, w[2])
+    e1_v1 = multiply(G1, int(w[4]))
     e12_v1 = pairing(G2, multiply(G1, w[4]))
 
-    print(" e1_x {}".format(e1_x))
-    print(" e2_x {}".format(e2_x))
+    print("1st") 
+    print(" X_1 {}".format(e1_x))
+    print(" X_2 {}".format(e2_x))
+    print(" V1_1 {}".format(e1_v1))
 
     print("1st: x*x - v1 = 0  {}".format(pairing(e2_x, e1_x) == e12_v1))
 
     # 2nd: y*y - v2 = 0
     # 2nd: 2*2 - 4 = 0
-    e2_y = multiply(G2, w[3])
     e1_y = multiply(G1, w[3])
+    e2_y = multiply(G2, w[3])
+    e1_v1 = multiply(G1, int(w[5]))
     e12_v2 = pairing(G2, multiply(G1, w[5]))
 
+    print("2nd")
+    print(" Y_1 {}".format(e1_y))
+    print(" Y_2 {}".format(e2_y))
+    print(" V2_1 {}".format(e1_v1))
     print("2nd: y*y - v2 = 0  {}".format(pairing(e2_y, e1_y) == e12_v2))
 
     # 3rd: v1*v2 - v3 = 0
-    e2_v1 = multiply(G2, w[4])
-    e1_v2 = multiply(G1, w[5])
+    # 3rd: 1*4 - 4 = 0
+    e1_v1 = multiply(G1, w[4])
+    e2_v2 = multiply(G2, w[5])
+    e1_v3 = multiply(G1, int(w[6]))
     e12_v3 = pairing(G2, multiply(G1, w[6]))
 
-    print("3rd: v1*v2 - v3 = 0  {}".format(pairing(e2_v1, e1_v2) == e12_v3))
+    print("3rd")
+    print(" V1_1 {}".format(e1_v1))
+    print(" V2_2 {}".format(e2_v2))
+    print(" V3_1 {}".format(e1_v3))
+    print("3rd {}".format(pairing(e2_v2, e1_v1) == e12_v3))
 
     # 4th: x*v2 - v4 = 0
-    e2_x = multiply(G2, w[2])
-    e1_v2 = multiply(G1, w[5])
+    e1_x = multiply(G1, w[2])
+    e2_v2 = multiply(G2, w[5])
+    e1_v4 = multiply(G1, int(w[7]))
     e12_v4 = pairing(G2, multiply(G1, w[7]))
 
-    print("4th: x*v2 - v4 = 0  {}".format(pairing(e2_x, e1_v2) == e12_v4))
+    print("4th")
+    print(" X_1 {}".format(e1_x))
+    print(" V2_2 {}".format(e2_v2))
+    print(" V4_1 {}".format(e1_v4))
+    print("4th: x*v2 - v4 = 0  {}".format(pairing(e2_v2, e1_x) == e12_v4))
 
     # 5th: (5*v1)*x - out - 10*y + v1 - 4*v3 + 13*v4 = 0
     #  5*v1*x = out + 10*y - v1 + 4*v3 - 13*v4  = 5*v1*x
@@ -165,5 +184,8 @@ def test_parings():
     RHS_3 = add(RHS_1, RHS_2)
     RHS_final = add(RHS_3, e1_negate_13v4)
 
+    print(" e2_x {}".format(e2_x))
+    print(" e2_x {}".format(e2_x))
+    print(" e1_v2 {}".format(e1_v2))
     print("5th: (5*v1)*x - out - 10*y + v1 - 4*v3 + 13*v4 = 0  {}".format(pairing(e2_5v1, e1_x) == pairing(G2, RHS_final)))
     assert False
