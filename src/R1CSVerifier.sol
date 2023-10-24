@@ -27,48 +27,67 @@ contract R1CSVerifier {
 
     // struct Coefficient{
 
-    // 1st: (1)x* (1)x - (1)v1 = 0
+    // 1st: (1)x* (1)x + (-1)v1 = 0
     uint256 l1 = 1;
     uint256 r1 = 1;
     uint256 o1 = 1;
 
-    uint256 l2;
-    uint256 r2;
-    uint256 o2;
+    // 2nd: (1)y* (1)y + (-1)v2 = 0
+    uint256 l2 = 1;
+    uint256 r2 = 1;
+    uint256 o2 = 1;
 
-    uint256 l3;
-    uint256 r3;
-    uint256 o3;
+    // 3rd: (1)v1* (1)v2 + (-1)v3 = 0
+    uint256 l3 = 1;
+    uint256 r3 = 1;
+    uint256 o3 = 1;
 
-    uint256 l4;
-    uint256 r4;
-    uint256 o4;
+    // 4th: (1)x* (1)v2 + (-1)v4 = 0
+    uint256 l4 = 1;
+    uint256 r4 = 1;
+    uint256 o4 = 1;
 
-    uint256 l5;
-    uint256 r5;
-    uint256 o5_1;
-    uint256 o5_2;
-    uint256 o5_3;
-    uint256 o5_4;
-    uint256 o5_5;
+    // 5th: (5)v1* (1)x + (-1)out + (-10)*y + (2)v1 + (-4)*v3 + (13)*v4  = 0
+    uint256 l5 = 5;
+    uint256 r5 = 1;
+    uint256 o5_1 = 1;
+    uint256 o5_2 = 10;
+    uint256 o5_3 = 2;
+    uint256 o5_4 = 4;
+    uint256 o5_5 = 13;
     // }
 
     // Our witness vector is: [1 out x y v1 v2 v3 v4]
 
-    // 1st: x*x - v1 = 0
+    // 1st: (1)x* (1)x + (-1)v1 = 0
     function verify_one(
-        G1Point memory X1,
-        G2Point memory X2,
-        G1Point memory V1
+        G1Point memory X_1,
+        G2Point memory X_2,
+        G1Point memory V1_1
     ) external view returns (bool) {
 
         return pairingProd2(
-            scalar_mul(X1, l1*r1),
-            X2,
-            negate(scalar_mul(V1, o1)),
+            scalar_mul(X_1, l1*r1),
+            X_2,
+            negate(scalar_mul(V1_1, o1)),
             P2()
         );
 
+    }
+
+    // 2nd: (1)y* (1)y + (-1)v2 = 0
+    function verify_two(
+        G1Point memory Y_1,
+        G2Point memory Y_2,
+        G1Point memory V2_1
+    ) external view returns (bool) {
+
+        return pairingProd2(
+            scalar_mul(Y_1, l2*r2),
+            Y_2,
+            negate(scalar_mul(V2_1, o2)),
+            P2()
+        );
     }
 
     /// @return the result of computing the pairing check
