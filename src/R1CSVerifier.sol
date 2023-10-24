@@ -24,9 +24,6 @@ contract R1CSVerifier {
     // 4th: x*v2 - v4 = 0
     // 5th: (5*v1)*x - out - 10*y + v1 - 4*v3 + 13*v4 = 0
 
-
-    // struct Coefficient{
-
     // 1st: (1)x* (1)x + (-1)v1 = 0
     uint256 l1 = 1;
     uint256 r1 = 1;
@@ -47,15 +44,14 @@ contract R1CSVerifier {
     uint256 r4 = 1;
     uint256 o4 = 1;
 
-    // 5th: (5)v1* (1)x + (-1)out + (-10)*y + (2)v1 + (-4)*v3 + (13)*v4  = 0
+    // 5th: (5)v1* (1)x + (-1)out + (-10)*y + (1)v1 + (-4)*v3 + (13)*v4  = 0
     uint256 l5 = 5;
     uint256 r5 = 1;
     uint256 o5_1 = 1;
     uint256 o5_2 = 10;
-    uint256 o5_3 = 2;
+    uint256 o5_3 = 1;
     uint256 o5_4 = 4;
     uint256 o5_5 = 13;
-    // }
 
     // Our witness vector is: [1 out x y v1 v2 v3 v4]
 
@@ -119,6 +115,77 @@ contract R1CSVerifier {
             P2()
         );
     }
+
+    // uint256 l5 = 5;
+    // uint256 r5 = 1;
+    // uint256 o5_1 = 1;
+    // uint256 o5_2 = 10;
+    // uint256 o5_3 = 2;
+    // uint256 o5_4 = 4;
+    // uint256 o5_5 = 13;
+
+    // 5th: (5)v1* (1)x + (-1)out + (-10)*y + (2)v1 + (-4)*v3 + (13)*v4  = 0
+    // function verify_five(
+    //     G1Point memory V1_1,
+    //     G2Point memory X_2,
+    //     G1Point memory OUT_1,
+    //     G1Point memory Y_1,
+    //     // G1Point memory V1_1,
+    //     G1Point memory V3_1,
+    //     G1Point memory V4_1
+    // ) external view returns (bool) {
+
+    //     G1Point memory first = negate(scalar_mul(OUT_1, o5_1));
+    //     G1Point memory second = negate(scalar_mul(Y_1, o5_2));
+    //     G1Point memory third = scalar_mul(V1_1, o5_3);
+    //     G1Point memory forth = negate(scalar_mul(V3_1, o5_4));
+    //     G1Point memory fifth = scalar_mul(V4_1, o5_5);
+
+    //     G1Point memory RHS = plus( plus( plus(first, second), plus(third, forth)), fifth) ;
+
+    //     return pairingProd2(
+    //         // (5)v1* (1)x
+    //         scalar_mul(V1_1, l5*r5),
+    //         X_2,
+    //         RHS,
+    //         P2()
+    //     );
+
+    // }
+
+    // 5th: (5)v1* (1)x + (-1)out + (-10)*y + (2)v1 + (-4)*v3 + (13)*v4  = 0
+    function verify_five(
+        G1Point memory V1_1,
+        G2Point memory X_2,
+        G1Point memory OUT_1,
+        G1Point memory Y_1,
+        // G1Point memory V1_1,
+        G1Point memory V3_1,
+        G1Point memory V4_1
+    ) external view returns (bool) {
+
+        return pairingProd6(
+            // (5)v1* (1)x
+            scalar_mul(V1_1, l5*r5),
+            X_2,
+            // (-1)out
+            negate(scalar_mul(OUT_1, o5_1)),
+            P2(),
+            // (-10)*y
+            negate(scalar_mul(Y_1, o5_2)),
+            P2(),
+            // (1)v1
+            scalar_mul(V1_1, o5_3),
+            P2(),
+            // (-4)*v3
+            negate(scalar_mul(V3_1, o5_4)),
+            P2(),
+            // (13)*v4
+            scalar_mul(V4_1, o5_5),
+            P2()
+        );
+    }
+
 
     /// @return the result of computing the pairing check
     /// e(p1[0], p2[0]) *  .... * e(p1[n], p2[n]) == 1
@@ -211,6 +278,40 @@ contract R1CSVerifier {
         p2[3] = d2;
         return pairing(p1, p2);
     }
+    
+
+    /// Convenience method for a pairing check for six pairs.
+    function pairingProd6(
+            G1Point memory a1,
+            G2Point memory a2,
+            G1Point memory b1,
+            G2Point memory b2,
+            G1Point memory c1,
+            G2Point memory c2,
+            G1Point memory d1,
+            G2Point memory d2,
+            G1Point memory e1,
+            G2Point memory e2,
+            G1Point memory f1,
+            G2Point memory f2
+        ) internal view returns (bool) {
+            G1Point[] memory p1 = new G1Point[](6);
+            G2Point[] memory p2 = new G2Point[](6);
+            p1[0] = a1;
+            p1[1] = b1;
+            p1[2] = c1;
+            p1[3] = d1;
+            p1[4] = e1;
+            p1[5] = f1;
+
+            p2[0] = a2;
+            p2[1] = b2;
+            p2[2] = c2;
+            p2[3] = d2;
+            p2[4] = e2;
+            p2[5] = f2;
+            return pairing(p1, p2);
+        }
 
     uint256 constant PRIME_Q = 21888242871839275222246405745257275088696311157297823662689037894645226208583;
 

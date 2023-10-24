@@ -157,6 +157,7 @@ def test_parings():
     print("3rd {}".format(pairing(e2_v2, e1_v1) == e12_v3))
 
     # 4th: x*v2 - v4 = 0
+    # 4th: 1*4 - 4 = 0
     e1_x = multiply(G1, w[2])
     e2_v2 = multiply(G2, w[5])
     e1_v4 = multiply(G1, int(w[7]))
@@ -169,12 +170,20 @@ def test_parings():
     print("4th: x*v2 - v4 = 0  {}".format(pairing(e2_v2, e1_x) == e12_v4))
 
     # 5th: (5*v1)*x - out - 10*y + v1 - 4*v3 + 13*v4 = 0
-    #  5*v1*x = out + 10*y - v1 + 4*v3 - 13*v4  = 5*v1*x
-    e2_5v1 = multiply(G2, 5*w[4])
-    e1_x = multiply(G1, w[2])
+    # 5th: 5*1*1 - 22 - 10*2 + 1 - 4*4 + 13*4 = 0
+    e1_v1 = multiply(G1, w[4])
+
+    e1_5v1 = multiply(G1, 5*w[4])
+    e2_x = multiply(G2, w[2])
+
+   
+    e1_y = multiply(G1, w[3])
+    e1_v3 = multiply(G1, w[6])
+    e1_v4 = multiply(G1, w[7])
 
     e1_out = multiply(G1, w[1])
     e1_10y = multiply(G1, 10*w[3])
+   
     e1_negate_v1 = neg(multiply(G1, w[4]))
     e1_4v3 = multiply(G1, 4*w[6])
     e1_negate_13v4 = neg(multiply(G1, 13*w[7]))
@@ -184,8 +193,12 @@ def test_parings():
     RHS_3 = add(RHS_1, RHS_2)
     RHS_final = add(RHS_3, e1_negate_13v4)
 
-    print(" e2_x {}".format(e2_x))
-    print(" e2_x {}".format(e2_x))
-    print(" e1_v2 {}".format(e1_v2))
-    print("5th: (5*v1)*x - out - 10*y + v1 - 4*v3 + 13*v4 = 0  {}".format(pairing(e2_5v1, e1_x) == pairing(G2, RHS_final)))
+    print(" 5th")
+    print(" V1_1 {}".format(e1_v1))
+    print(" X_2 {}".format(e2_x))
+    print(" OUT_1 {}".format(e1_out))
+    print(" Y_1 {}".format(e1_y))
+    print(" V3_1 {}".format(e1_v3))
+    print(" V4_1 {}".format(e1_v4))
+    print("5th: (5*v1)*x - out - 10*y + v1 - 4*v3 + 13*v4 = 0  {}".format(pairing(e2_x, e1_5v1) == pairing(G2, RHS_final)))
     assert False
