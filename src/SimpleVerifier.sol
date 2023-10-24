@@ -44,7 +44,6 @@ contract SimpleVerifier {
 
     // To get the value for test cases. run:
     // poetry run pytest tests/test_paring_verify.py
-
     function constraints() internal pure returns (Constraints memory cs) {
         // e_B1 or α1 (10415861484417082502655338383609494480414113902179649885744799961447382638712, 10196215078179488638353184030336251401353352596818396260819493263908881608606)
         cs.alfa1 = G1Point({
