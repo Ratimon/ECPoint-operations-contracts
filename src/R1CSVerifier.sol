@@ -116,50 +116,12 @@ contract R1CSVerifier {
         );
     }
 
-    // uint256 l5 = 5;
-    // uint256 r5 = 1;
-    // uint256 o5_1 = 1;
-    // uint256 o5_2 = 10;
-    // uint256 o5_3 = 2;
-    // uint256 o5_4 = 4;
-    // uint256 o5_5 = 13;
-
-    // 5th: (5)v1* (1)x + (-1)out + (-10)*y + (2)v1 + (-4)*v3 + (13)*v4  = 0
-    // function verify_five(
-    //     G1Point memory V1_1,
-    //     G2Point memory X_2,
-    //     G1Point memory OUT_1,
-    //     G1Point memory Y_1,
-    //     // G1Point memory V1_1,
-    //     G1Point memory V3_1,
-    //     G1Point memory V4_1
-    // ) external view returns (bool) {
-
-    //     G1Point memory first = negate(scalar_mul(OUT_1, o5_1));
-    //     G1Point memory second = negate(scalar_mul(Y_1, o5_2));
-    //     G1Point memory third = scalar_mul(V1_1, o5_3);
-    //     G1Point memory forth = negate(scalar_mul(V3_1, o5_4));
-    //     G1Point memory fifth = scalar_mul(V4_1, o5_5);
-
-    //     G1Point memory RHS = plus( plus( plus(first, second), plus(third, forth)), fifth) ;
-
-    //     return pairingProd2(
-    //         // (5)v1* (1)x
-    //         scalar_mul(V1_1, l5*r5),
-    //         X_2,
-    //         RHS,
-    //         P2()
-    //     );
-
-    // }
-
     // 5th: (5)v1* (1)x + (-1)out + (-10)*y + (2)v1 + (-4)*v3 + (13)*v4  = 0
     function verify_five(
         G1Point memory V1_1,
         G2Point memory X_2,
         G1Point memory OUT_1,
         G1Point memory Y_1,
-        // G1Point memory V1_1,
         G1Point memory V3_1,
         G1Point memory V4_1
     ) external view returns (bool) {
@@ -336,7 +298,6 @@ contract R1CSVerifier {
             );
 
     }
-    
 
     /*
     * @return The negation of p, i.e. p.plus(p.negate()) should be zero.

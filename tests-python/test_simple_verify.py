@@ -7,8 +7,6 @@ def test_simple_verify():
     B = multiply(G1, 6)
     C = multiply(G1, 5 * 6)
 
-    print("G1  {}".format(G1 ))
-
     print("pairing(A, B) == pairing(G2, C)  {}".format(pairing(A, B) == pairing(G2, C) ))
 
     # 0 = − A B + α β + X γ + C δ
