@@ -5,12 +5,11 @@ pragma solidity =0.8.20;
  * @notice leverages the precompiles
  */
 contract SimpleVerifier {
-
     struct G1Point {
         uint256 X;
         uint256 Y;
-      }
-    
+    }
+
     // Encoding of field elements is: X[0] * z + X[1]
     struct G2Point {
         uint256[2] X;
@@ -35,7 +34,7 @@ contract SimpleVerifier {
     // C1 = 4
     // δ2 = 5
 
-    struct Constraints{
+    struct Constraints {
         G1Point alfa1;
         G2Point beta2;
         G2Point gamma2;
@@ -83,7 +82,6 @@ contract SimpleVerifier {
                 uint256(21508930868448350162258892668132814424284302804699005394342512102884055673846)
             ]
         });
-
     }
 
     // 0 = − A B + α β + X γ + C δ
@@ -92,13 +90,11 @@ contract SimpleVerifier {
     // 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
     // 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
 
-    function verify(
-        G1Point memory A1,
-        G2Point memory B2,
-        G1Point memory C1,
-        uint256[] memory X
-    ) external view returns (bool) {
-
+    function verify(G1Point memory A1, G2Point memory B2, G1Point memory C1, uint256[] memory X)
+        external
+        view
+        returns (bool)
+    {
         require(X.length == 3, "X length does not match");
 
         Constraints memory cs = constraints();
@@ -111,17 +107,7 @@ contract SimpleVerifier {
             X1 = plus(X1, scalar_mul(Generator, X[i]));
         }
 
-        return paring(
-            negate(A1),
-            B2,
-            cs.alfa1,
-            cs.beta2,
-            X1,
-            cs.gamma2,
-            C1,
-            cs.delta2
-        );
-
+        return paring(negate(A1), B2, cs.alfa1, cs.beta2, X1, cs.gamma2, C1, cs.delta2);
     }
 
     function paring(
@@ -133,36 +119,35 @@ contract SimpleVerifier {
         G2Point memory C2,
         G1Point memory D1,
         G2Point memory D2
-      ) public view returns (bool) {
-
+    ) public view returns (bool) {
         G1Point[4] memory P1 = [A1, B1, C1, D1];
         G2Point[4] memory P2 = [A2, B2, C2, D2];
-    
+
         uint256 inputSize = 24;
         uint256[] memory input = new uint256[](inputSize);
-    
+
         for (uint256 i = 0; i < 4; i++) {
-          uint256 j = i * 6;
-          input[j + 0] = P1[i].X;
-          input[j + 1] = P1[i].Y;
-          input[j + 2] = P2[i].X[0];
-          input[j + 3] = P2[i].X[1];
-          input[j + 4] = P2[i].Y[0];
-          input[j + 5] = P2[i].Y[1];
+            uint256 j = i * 6;
+            input[j + 0] = P1[i].X;
+            input[j + 1] = P1[i].Y;
+            input[j + 2] = P2[i].X[0];
+            input[j + 3] = P2[i].X[1];
+            input[j + 4] = P2[i].Y[0];
+            input[j + 5] = P2[i].Y[1];
         }
-    
+
         uint256[1] memory out;
         bool success;
-    
-        assembly {
-          success := staticcall(sub(gas(), 2000), 8, add(input, 0x20), mul(inputSize, 0x20), out, 0x20)
-          switch success case 0 { invalid() }
-        }
-    
-        require(success, "pairing-opcode-failed");
-    
-        return out[0] != 0;
 
+        assembly {
+            success := staticcall(sub(gas(), 2000), 8, add(input, 0x20), mul(inputSize, 0x20), out, 0x20)
+            switch success
+            case 0 { invalid() }
+        }
+
+        require(success, "pairing-opcode-failed");
+
+        return out[0] != 0;
     }
 
     uint256 constant PRIME_Q = 21888242871839275222246405745257275088696311157297823662689037894645226208583;
@@ -173,19 +158,16 @@ contract SimpleVerifier {
     function negate(G1Point memory p) internal pure returns (G1Point memory) {
         // The prime q in the base field F_q for G1
         if (p.X == 0 && p.Y == 0) {
-        return G1Point(0, 0);
+            return G1Point(0, 0);
         } else {
-        return G1Point(p.X, PRIME_Q - (p.Y % PRIME_Q));
+            return G1Point(p.X, PRIME_Q - (p.Y % PRIME_Q));
         }
     }
-    
+
     /*
     * @return r the sum of two points of G1
     */
-    function plus(
-        G1Point memory p1,
-        G1Point memory p2
-    ) internal view returns (G1Point memory r) {
+    function plus(G1Point memory p1, G1Point memory p2) internal view returns (G1Point memory r) {
         uint256[4] memory input;
         input[0] = p1.X;
         input[1] = p1.Y;
@@ -195,7 +177,8 @@ contract SimpleVerifier {
 
         assembly {
             success := staticcall(sub(gas(), 2000), 6, input, 0xc0, r, 0x60)
-            switch success case 0 { invalid() }
+            switch success
+            case 0 { invalid() }
         }
 
         require(success, "pairing-add-failed");
@@ -214,9 +197,9 @@ contract SimpleVerifier {
         bool success;
         assembly {
             success := staticcall(sub(gas(), 2000), 7, input, 0x80, r, 0x60)
-            switch success case 0 { invalid() }
+            switch success
+            case 0 { invalid() }
         }
         require(success, "pairing-mul-failed");
     }
-
 }

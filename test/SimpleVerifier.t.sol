@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity =0.8.20;
 
-import {Test,console2, stdError} from "@forge-std/Test.sol";
+import {Test, console2, stdError} from "@forge-std/Test.sol";
 
 import {SimpleVerifier} from "@main/SimpleVerifier.sol";
 
@@ -27,10 +27,9 @@ contract SimpleVerifierTest is Test {
     }
 
     /**
-    * @notice verifies the paring computation of the EC points.
-    */
+     * @notice verifies the paring computation of the EC points.
+     */
     function test_paring() external {
-        
         // 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
         // 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
 
@@ -45,7 +44,6 @@ contract SimpleVerifierTest is Test {
 
         // D1 = 4
         // D2 = 5
-
 
         // To get the value for test cases. run:
         // poetry run pytest tests-python/test_paring_verify.py
@@ -135,9 +133,9 @@ contract SimpleVerifierTest is Test {
     }
 
     function test_verify() external {
-        // 0 = − A B + α β + X γ + C δ 
+        // 0 = − A B + α β + X γ + C δ
         // where X = 2 x G1 + 3 x G1 + 5 x G1
-        
+
         // 3 * 27 = 2 * 10 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
         // 0 = - 61 * 1 + 7 * 3 + (2 + 3 + 5) * 2 + 4 * 5
 
@@ -154,7 +152,7 @@ contract SimpleVerifierTest is Test {
         // δ2 = 5
 
         // encrypted : A1 = 61
-        // A1 (14960043073304393894129795755410277211446607165064567980923647220163495826045, 13577027506910568938670526219344477770692736772910529266985772791468909012663) 
+        // A1 (14960043073304393894129795755410277211446607165064567980923647220163495826045, 13577027506910568938670526219344477770692736772910529266985772791468909012663)
 
         SimpleVerifier.G1Point memory A1 = SimpleVerifier.G1Point({
             X: uint256(14960043073304393894129795755410277211446607165064567980923647220163495826045),
@@ -188,6 +186,5 @@ contract SimpleVerifierTest is Test {
 
         bool isVerified = verifier.verify(A1, B2, C1, X);
         assertEq(isVerified, true);
-
     }
 }

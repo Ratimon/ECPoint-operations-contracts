@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity =0.8.20;
 
-import {Test,console2, stdError} from "@forge-std/Test.sol";
+import {Test, console2, stdError} from "@forge-std/Test.sol";
 import {R1CSVerifier} from "@main/R1CSVerifier.sol";
 
 contract R1CSVerifierTest is Test {
@@ -25,20 +25,15 @@ contract R1CSVerifierTest is Test {
         vm.stopPrank();
     }
 
-
-     // 1st: (1)x* (1)x + (-1)v1 = 0
+    // 1st: (1)x* (1)x + (-1)v1 = 0
     function test_verify_one() external {
- 
         // poetry run pytest tests-python/test_r1cs_verifier.py
         // # Our witness vector is: [1 out x y v1 v2 v3 v4]
         // w  [ 1 22  1  2  1  4  4  4]
 
         // encrypted : X_1 = 1
         // X1 (1, 2)
-        R1CSVerifier.G1Point memory X_1 = R1CSVerifier.G1Point({
-            X: uint256(1),
-            Y: uint256(2)
-        });
+        R1CSVerifier.G1Point memory X_1 = R1CSVerifier.G1Point({X: uint256(1), Y: uint256(2)});
 
         // encrypted : X_2 = 1
         // X_2 ((10857046999023057135944570762232829481370756359578518086990519993285655852781, 11559732032986387107991004021392285783925812861821192530917403151452391805634), (8495653923123431417604973247489272438418190587263600148770280649306958101930, 4082367875863433681332203403145435568316851327593401208105741076214120093531))
@@ -55,19 +50,14 @@ contract R1CSVerifierTest is Test {
 
         // encrypted : V1_1 = 1
         // V1_1 (1, 2)
-        R1CSVerifier.G1Point memory V1_1 = R1CSVerifier.G1Point({
-            X: uint256(1),
-            Y: uint256(2)
-        });
+        R1CSVerifier.G1Point memory V1_1 = R1CSVerifier.G1Point({X: uint256(1), Y: uint256(2)});
 
         bool isVerified = verifier.verify_one(X_1, X_2, V1_1);
         assertEq(isVerified, true);
-
     }
 
     // 2nd: (1)y* (1)y + (-1)v2 = 0
     function test_verify_two() external {
- 
         // poetry run pytest tests-python/test_r1cs_verifier.py
         // # Our witness vector is: [1 out x y v1 v2 v3 v4]
         // w  [ 1 22  1  2  1  4  4  4]
@@ -103,19 +93,15 @@ contract R1CSVerifierTest is Test {
         assertEq(isVerified, true);
     }
 
-     // 3rd: (1)v1* (1)v2 + (-1)v3 = 0
+    // 3rd: (1)v1* (1)v2 + (-1)v3 = 0
     function test_verify_three() external {
- 
         // poetry run pytest tests-python/test_r1cs_verifier.py
         // # Our witness vector is: [1 out x y v1 v2 v3 v4]
         // w  [ 1 22  1  2  1  4  4  4]
 
         // encrypted : V1_1 = 1
         // V1_1 (1, 2)
-        R1CSVerifier.G1Point memory V1_1 = R1CSVerifier.G1Point({
-            X: uint256(1),
-            Y: uint256(2)
-        });
+        R1CSVerifier.G1Point memory V1_1 = R1CSVerifier.G1Point({X: uint256(1), Y: uint256(2)});
 
         // encrypted : V2_2 = 4
         // V2_2 ((18936818173480011669507163011118288089468827259971823710084038754632518263340, 18556147586753789634670778212244811446448229326945855846642767021074501673839), (18825831177813899069786213865729385895767511805925522466244528695074736584695, 13775476761357503446238925910346030822904460488609979964814810757616608848118))
@@ -141,19 +127,15 @@ contract R1CSVerifierTest is Test {
         assertEq(isVerified, true);
     }
 
-     // 4th: (1)x* (1)v2 + (-1)v4 = 0
+    // 4th: (1)x* (1)v2 + (-1)v4 = 0
     function test_verify_four() external {
- 
         // poetry run pytest tests-python/test_r1cs_verifier.py
         // # Our witness vector is: [1 out x y v1 v2 v3 v4]
         // w  [ 1 22  1  2  1  4  4  4]
 
         // encrypted : X_1 = 1
         // X_1 (1, 2)
-        R1CSVerifier.G1Point memory X_1 = R1CSVerifier.G1Point({
-            X: uint256(1),
-            Y: uint256(2)
-        });
+        R1CSVerifier.G1Point memory X_1 = R1CSVerifier.G1Point({X: uint256(1), Y: uint256(2)});
 
         // encrypted : V2_2 = 4
         // V2_2 ((18936818173480011669507163011118288089468827259971823710084038754632518263340, 18556147586753789634670778212244811446448229326945855846642767021074501673839), (18825831177813899069786213865729385895767511805925522466244528695074736584695, 13775476761357503446238925910346030822904460488609979964814810757616608848118))
@@ -180,17 +162,13 @@ contract R1CSVerifierTest is Test {
     }
 
     function test_verify_five() external {
-
         // poetry run pytest tests-python/test_r1cs_verifier.py
         // # Our witness vector is: [1 out x y v1 v2 v3 v4]
         // w  [ 1 22  1  2  1  4  4  4]
 
         // encrypted : V1_1 = 1
         // V1_1 (1, 2)
-        R1CSVerifier.G1Point memory V1_1 = R1CSVerifier.G1Point({
-            X: uint256(1),
-            Y: uint256(2)
-        });
+        R1CSVerifier.G1Point memory V1_1 = R1CSVerifier.G1Point({X: uint256(1), Y: uint256(2)});
 
         // encrypted : X_2 = 1
         // X_2 ((10857046999023057135944570762232829481370756359578518086990519993285655852781, 11559732032986387107991004021392285783925812861821192530917403151452391805634), (8495653923123431417604973247489272438418190587263600148770280649306958101930, 4082367875863433681332203403145435568316851327593401208105741076214120093531))
@@ -233,9 +211,7 @@ contract R1CSVerifierTest is Test {
             Y: uint256(4027184618003122424972590350825261965929648733675738730716654005365300998076)
         });
 
-
-        bool isVerified = verifier.verify_five(V1_1, X_2, OUT_1, Y_1, V3_1, V4_1 );
+        bool isVerified = verifier.verify_five(V1_1, X_2, OUT_1, Y_1, V3_1, V4_1);
         assertEq(isVerified, true);
-
     }
 }

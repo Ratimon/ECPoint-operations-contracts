@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity =0.8.20;
 
-import {Test,console2, stdError} from "@forge-std/Test.sol";
+import {Test, console2, stdError} from "@forge-std/Test.sol";
 
 import {ECOperations} from "@main/ECOperations.sol";
 
@@ -52,10 +52,9 @@ contract ECOperationsTest is Test {
     }
 
     function test_matMul() external view {
-
         // 2x + 8y = 7944
         // 5x + 3y = 4764
-    
+
         // Known solution (known only to the prover)
         // x = 420
         // y = 888
@@ -95,6 +94,5 @@ contract ECOperationsTest is Test {
         });
 
         ec.matMul(matrix, 2, s, o);
-
     }
 }
