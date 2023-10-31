@@ -1,8 +1,12 @@
 ## ECPoint-operations-contracts
 
 
-Elliptic curve point operations on solidity contract that leverages the precompiles : **add** and **multiplication** for Elliptic curve point (EIP196)
+Elliptic curve point operations on solidity contract that:
 
+- leverages the pre-compiles : **add** and **multiplication** (EIP196) **paring** (EIP197) for Elliptic curve point
+
+- **Encrypted R1CS verifier** in the form : $L\mathbf{\vec{[s]_1}}\odot R\mathbf{\vec{[s]_2}} = O\mathbf{\vec{[s]}_{12}}$
+ 
 ## Usage
 
 ### Build

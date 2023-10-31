@@ -1,7 +1,11 @@
 from py_ecc.bn128 import G1, G2,add, multiply, neg, pairing
+from py_ecc.optimized_bn128 import normalize
 
 
 def test_simple_verify():
+
+    print("G1 {}".format(G1))
+    print("G2 {}".format(G2))
 
     A = multiply(G2, 5)
     B = multiply(G1, 6)
