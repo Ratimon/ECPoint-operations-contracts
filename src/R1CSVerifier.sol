@@ -2,7 +2,7 @@
 pragma solidity =0.8.20;
 
 /**
- * @notice leverages the precompiles
+ * @notice Encrypted R1CS
  */
 contract R1CSVerifier {
     struct G1Point {
