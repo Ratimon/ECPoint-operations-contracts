@@ -12,6 +12,7 @@ py-ecc = "^6.0.0"
 pytest = "^7.4.2"
 numpy = ">=1.21.0"
 galois = "0.3.6"
+scipy = "^1.11.3"
 
 
 [build-system]

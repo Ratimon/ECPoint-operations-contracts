@@ -4,7 +4,7 @@ import galois
 from py_ecc.bn128 import G1, G2, multiply,add, neg, pairing
 
 
-def test_polynomial_transfrom():
+def test_r1cs_transfrom():
 
     # Transforming:
     # out = 5*x^3 - 4*y^2*x^2 + 13*x*y^2 + x^2 - 10*y
