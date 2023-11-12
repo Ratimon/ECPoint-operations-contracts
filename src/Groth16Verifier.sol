@@ -26,10 +26,9 @@ contract Groth16Verifier {
     }
 
     function verifierKey() public pure returns (VerifierKey memory vk) {
-
         // test suites input are generated from
         // https://github.com/Ratimon/python-zk-math/blob/main/Groth16.ipynb
-        
+
         vk = VerifierKey(
             // alpha
             G1Point({
@@ -82,9 +81,11 @@ contract Groth16Verifier {
         );
     }
 
-
-    function verify(G1Point memory A, G2Point memory B, G1Point memory C, uint256[2] memory input) external view returns (bool) {
-
+    function verify(G1Point memory A, G2Point memory B, G1Point memory C, uint256[2] memory input)
+        external
+        view
+        returns (bool)
+    {
         VerifierKey memory vk = verifierKey();
 
         G1Point memory k1 = scalar_mul(vk.IC0, input[0]);
@@ -92,7 +93,7 @@ contract Groth16Verifier {
         G1Point memory K = plus(k1, k2);
 
         // -A * B + alpha * beta + C * delta + K * gamma = 0
-        return pairingProd4(negate(A), B, vk.alpha, vk.beta, C, vk.delta, K, vk.gamma );
+        return pairingProd4(negate(A), B, vk.alpha, vk.beta, C, vk.delta, K, vk.gamma);
     }
 
     /// @return the result of computing the pairing check
@@ -148,7 +149,6 @@ contract Groth16Verifier {
         p2[3] = d2;
         return pairing(p1, p2);
     }
-
 
     uint256 constant PRIME_Q = 21888242871839275222246405745257275088696311157297823662689037894645226208583;
 
@@ -222,7 +222,4 @@ contract Groth16Verifier {
         }
         require(success, "pairing-mul-failed");
     }
-
-
-
 }

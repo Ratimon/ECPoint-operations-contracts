@@ -137,7 +137,4 @@ contract QAPVerifier {
         }
         require(success, "pairing-mul-failed");
     }
-
-
-
 }

@@ -27,7 +27,6 @@ contract Groth16VerifierTest is Test {
 
     // 1st: (1)x* (1)x + (-1)v1 = 0
     function test_verify() external {
-
         // test suites input are generated from
         // https://github.com/Ratimon/python-zk-math/blob/main/Groth16.ipynb
 
@@ -70,14 +69,12 @@ contract Groth16VerifierTest is Test {
             Y: uint256(2660927896632112094165426621818690582616247844306821935940755268981089605284)
         });
 
-        uint256[2] memory _inputs ;
+        uint256[2] memory _inputs;
 
-        _inputs[0] =  1;
-        _inputs[1] =  14;
+        _inputs[0] = 1;
+        _inputs[1] = 14;
 
         bool isVerified = verifier.verify(A, B, C, _inputs);
         assertEq(isVerified, true);
     }
-
-
 }

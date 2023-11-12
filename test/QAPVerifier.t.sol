@@ -27,7 +27,6 @@ contract QAPVerifierTest is Test {
 
     // 1st: (1)x* (1)x + (-1)v1 = 0
     function test_verify() external {
-
         // test suites input are generated from
         // https://github.com/Ratimon/python-zk-math/blob/main/R1CSToQAP.ipynb
 
@@ -64,6 +63,4 @@ contract QAPVerifierTest is Test {
         bool isVerified = verifier.verify(A_1, B_2, C_1);
         assertEq(isVerified, true);
     }
-
-
 }
